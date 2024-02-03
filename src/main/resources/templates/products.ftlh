@@ -6,10 +6,18 @@
 <body>
 <h1>WebSell</h1><hr>
 <h4>All products</h4>
+<form action="/" method="get">
+    Search by title <input type="text" name="title"><br>
+    <input type="submit" name="search">
+</form>
+
+
 <#list products as product>
     <div>
         <p><b>${product.title}</b> ${product.price} | <a href="/product/${product.id}">Подробнее</a></p>
     </div>
+    <#else>
+    <h3>Sold out</h3>
 </#list>
 <hr>
 <h3>Создать новый товар</h3>
