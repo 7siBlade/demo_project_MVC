@@ -6,6 +6,9 @@
 <body>
 <h1>WebSell</h1><hr>
 <h4>Detailed information</h4>
+<#list images as img>
+    <img src="/images/${img.id}" height="60px"/><br><br>
+</#list>
 <b>Title Ad: </b>${product.title}<br>
 <b>Description Ad: </b>${product.description}<br>
 <b>Price: </b>${product.price}<br>
