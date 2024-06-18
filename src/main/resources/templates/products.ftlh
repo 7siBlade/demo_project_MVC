@@ -14,6 +14,8 @@
     <div>
         <p><b>${product.title}</b> ${product.price} | <a href="/product/${product.id}">Подробнее</a></p>
     </div>
+    <#else>
+    <h3>Sold out</h3>
 </#list>
 <hr>
 <h3>Создать новый товар</h3>
