@@ -9,15 +9,11 @@
 <#list images as img>
     <img src="/images/${img.id}" height="60px"/><br><br>
 </#list>
-<b>Title Ad: </b>${product.title}<br>
-<b>Description Ad: </b>${product.description}<br>
+<b>Title: </b>${product.title}<br>
+<b>Description: </b>${product.description}<br>
 <b>Price: </b>${product.price}<br>
 <b>City: </b>${product.city}<br>
-<b>Author Ad: </b>${product.author}<br>
-<hr>
-<h3>Создать новый товар</h3>
-<form action="/product/delete/${product.id}" method="post">
-	<input type="submit" value="Delete product"/>
-</form>
+<b>Author: </b>${product.user.name}<br>
+<b>Phone Number: </b>${product.user.phoneNumber}<br>
 </body>
 </html>
