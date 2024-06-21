@@ -4,7 +4,11 @@
     <title>WebSell</title>
 </head>
 <body>
-<h1>WebSell</h1><hr>
+<h1>WebSell | <a href="/login">Войти</a></h1><hr>
+<form action="/logut" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}>
+    <input type="submit" value="Выйти"/>
+</form>
 <h4>All products</h4>
 <form action="/" method="get">
     Поиск по названию объявления: <input type="text", name="title"><br>
