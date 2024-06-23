@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -23,9 +22,8 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    private List<Product> products = new ArrayList<>();
-    public List<Product> listProducts(String title){
-        if(title != null) return productRepository.findByTitle(title);
+    public List<Product> listProducts(String title) {
+        if (title != null) return productRepository.findByTitle(title);
         return productRepository.findAll();
     }
 
@@ -34,29 +32,27 @@ public class ProductService {
         Image image1;
         Image image2;
         Image image3;
-        if (file1.getSize() !=0){
+        if (file1.getSize() != 0) {
             image1 = toImageEntity(file1);
             image1.setPreviewImage(true);
             product.addImageToProduct(image1);
         }
-        if (file2.getSize() !=0){
+        if (file2.getSize() != 0) {
             image2 = toImageEntity(file2);
             product.addImageToProduct(image2);
         }
-        if (file3.getSize() !=0){
+        if (file3.getSize() != 0) {
             image3 = toImageEntity(file3);
             product.addImageToProduct(image3);
         }
-        log.info("Saving new Product. Title:{}; Author email:{}", product.getTitle(), product.getUser().getEmail());
+        log.info("Saving new Product. Title: {}; Author email: {}", product.getTitle(), product.getUser().getEmail());
         Product productFromDb = productRepository.save(product);
         productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
         productRepository.save(product);
     }
 
     public User getUserByPrincipal(Principal principal) {
-        if (principal == null) {
-            return new User();
-        }
+        if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
 
@@ -67,16 +63,25 @@ public class ProductService {
         image.setContentType(file.getContentType());
         image.setSize(file.getSize());
         image.setBytes(file.getBytes());
-        //System.out.println(Arrays.toString(file.getBytes()));
         return image;
     }
 
-    public void deleteProduct(Long id){
-        productRepository.deleteById(id);
+    public void deleteProduct(User user, Long id) {
+        Product product = productRepository.findById(id)
+                .orElse(null);
+        if (product != null) {
+            if (product.getUser().getId().equals(user.getId())) {
+                productRepository.delete(product);
+                log.info("Product with id = {} was deleted", id);
+            } else {
+                log.error("User: {} haven't this product with id = {}", user.getEmail(), id);
+            }
+        } else {
+            log.error("Product with id = {} is not found", id);
+        }
     }
 
-    public Product getProductBuId(Long id) {
-
+    public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
     }
 }
