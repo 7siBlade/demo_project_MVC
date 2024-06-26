@@ -21,6 +21,7 @@ import java.util.Map;
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminController {
     private final UserService userService;
+
     @GetMapping("/admin")
     public  String admin(Model model, Principal principal){
         model.addAttribute("users", userService.list());
@@ -37,7 +38,7 @@ public class AdminController {
     @GetMapping("/admin/user/edit/{user}")
     public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
-        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        //model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("roles", Role.values());
         return "user-edit";
     }

@@ -9,17 +9,17 @@
         <div class="carousel-inner">
             <#list images as image>
                 <div class="carousel-item <#if image.previewImage>active height="100%"</#if>">
-                    <svg class="bd-placeholder col-12 bg-secondary" width="100%" height="100%"
+                    <svg class="bd-placeholder col-12 " width="100%" height="275px"
                          role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false">
                         <title></title>
                         <rect width="100%" height="100%" fill="#fff"></rect>
-                        <text x="50%" y="50%" fill="#777" dy=""></text>
+                        <text x="50%" y="50%" fill="#fff" dy=""></text>
                     </svg>
 
                     <div class="container">
                         <div class="carousel-caption bg-light">
                             <a href="/images/${image.id}">
-                                <img class="product" style="height: 100px" src="/images/${image.id}">
+                                <img class="product" style="height: 200px" src="/images/${image.id}">
                             </a>
                         </div>
                     </div>
@@ -27,11 +27,11 @@
             </#list>
 
         </div>
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <a class="carousel-control-prev bg-info" href="#myCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <a class="carousel-control-next bg-info" href="#myCarousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
